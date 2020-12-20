@@ -1,9 +1,10 @@
 import React from 'react';
+import {useContext} from 'react';
+import { themeContext } from './ThemeProvider';
 
-const Cart = (props) => {
 
-    const { basket }= props;
-    console.log('basket',basket)
+const Cart = () => {
+    const {cart,remove} = useContext(themeContext)
     
     return (
         <div>
@@ -15,10 +16,10 @@ const Cart = (props) => {
                     <th>Quantity</th>
                     <th>Total</th>
                 </tr>
-                {props.cart && props.cart.map((item, key) => {
+                {cart && cart.map((item, key) => {
                         return (
                             <tr key={key}>
-                                <td className="disk"><img className="cartimage" src={item.image}/> <div><p>{item.detail}</p> <p className="text-link--accent " onClick={()=>props.remove(item)}>REMOVE</p></div> </td>
+                                <td className="disk"><img className="cartimage" src={item.image}/> <div><p>{item.detail}</p> <p className="text-link--accent " onClick={()=> remove(item)}>REMOVE</p></div> </td>
                                 <td>{item.price}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.sum}</td>
@@ -28,8 +29,8 @@ const Cart = (props) => {
                 </tbody>
             </table>
 
-            <p>Total:{" "}{basket.total}</p>
-            <p>TotalCount:{" "}{basket.itemCount}</p>
+            {/* <p>Total:{" "}{basket.total}</p>
+            <p>TotalCount:{" "}{basket.itemCount}</p> */}
         </div>
     );
 };
